@@ -1,7 +1,7 @@
 ##### PCA
 sample.groups <- c(rep("blue", 62), rep("red",42))
 #for relapse: blue is 62 none, red is 42 relapsed
-#for survival: blue is 12 alive, red is 30 dead
+
 
 transformed <- BBmisc::normalize(log2(hdat),method="center")
 pc <- princomp(transformed)
