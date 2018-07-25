@@ -1,0 +1,12 @@
+##### PCA
+sample.groups <- c(rep("blue", 62), rep("red",42))
+#for relapse: blue is 62 none, red is 42 relapsed
+#for survival: blue is 12 alive, red is 30 dead
+
+transformed <- BBmisc::normalize(log2(hdat),method="center")
+pc <- princomp(transformed)
+plot(pc)
+plot(pc$loadings, col=sample.groups, xlab= "Component 1", ylab="Component 2", main = "PCA")
+plot3d(pc$loadings, col=sample.groups, xlab= "Component 1", ylab="Component 2", zlab="Component 3", type = "s", size =1)
+
+boxplot(transformed)
