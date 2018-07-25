@@ -34,9 +34,17 @@ fit1 <- eBayes(fit1)
 
 toptable1 <- topTable(fit1)
 nrow(topTable(fit1, coef=1, number=54613))
-probeset.list1 <- topTable(fit1, coef=(1),number=54613,adjust.method = "fdr")
+probeset.list1 <- topTable(fit1, coef=(1),number=54613,lfc=0.5)
 head(probeset.list1)
+genes <- rownames(probeset.list1)
+#creating matrix of gene expression data for the relevant genes
+matrix <- transformedQ[genes,]
+matrix <- rbind(matrix, pheno$Class)
+head(matrix)
 
-write.table(probeset.list1, file = "output.txt", sep="\t", quote = F, row.names=T)
+write.table(t(matrix), file = "TopLFCSL0.7_withExpData.txt", sep="\t", quote = F, row.names=T)
+
+write.table(probeset.list1, file = "TopLFCSL0.75.txt", sep="\t", quote = F, row.names=T)
+
 
 volcanoplot(fit1)
