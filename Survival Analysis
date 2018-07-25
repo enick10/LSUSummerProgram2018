@@ -4,10 +4,8 @@ survdata <- read.csv(file = "SurvAnalysisTable.csv")
 survdata <- as.data.frame(survdata)
 
 SurvObj <- with(survdata, Surv(survdata[,1], survdata[,2]))
-# cox <- coxph(Surv(survdata[,1], survdata[,2]) ~ Class, survdata)
 
 kmWBC <- survfit(SurvObj ~ Class, data = survdata, conf.type = "log-log")
-# cox <- survfit(cox)
 
 GGally::ggsurv(kmWBC,CI=T,plot.cens = T,main="EF Survival",xlab="Time (days)") 
 ggsurvplot(kmWBC,conf.int=T,title="Overall Survival",pval=T,legend.labs=c("High WBC","Low WBC"),ggtheme=theme_minimal())
